@@ -19,6 +19,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PPECB.API", "PPECB.API\PPEC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PPECB.API.Tests", "PPECB.API.Tests\PPECB.API.Tests.csproj", "{FE5FAFCC-7268-49E9-A84E-8C4CF24E30B7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dbScript", "dbScript", "{871C6966-10EE-4402-B7C3-2E512875FD59}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Documents\script.sql = ..\..\..\Documents\script.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
