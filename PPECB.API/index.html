@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Employees</title>
+</head>
+<body>
+
+    <div>
+        <h2>All Employees</h2>
+        <ul id="employees" />
+    </div>
+    <div>
+        <h2>Search by ID</h2>
+        <input type="text" id="EmployeeId" size="5" />
+        <input type="button" value="Search" onclick="getById();" />
+        <p id="employee" />
+    </div>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script>
+        var uri = 'api/employee';
+
+        $(document).ready(function () {
+
+            $.getJSON(uri)
+                .done(function (data) {
+                    
+                    $.each(data, function (key, item) {
+                        //alert(item.Firstname + '  '+ key);
+                        // Add a list item for the product.
+                        $('<li>', { text: formatItem(item) }).appendTo($('#employees'));
+                    });
+                });
+        });
+
+        function formatItem(item) {
+            return item.Firstname + ' ' + item.Lastname;
+        }
+
+        function getById() {
+            var id = $('#EmployeeId').val();
+            $.getJSON(uri + '/' + id)
+                .done(function (data) {
+                    $('#employee').text(formatItem(data));
+                })
+                .fail(function (jqXHR, textStatus, err) {
+                    $('#employee').text('Error: ' + err);
+                });
+        }
+    </script>
+
+</body>
+</html>
