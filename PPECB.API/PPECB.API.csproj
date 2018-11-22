@@ -117,6 +117,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AddEmployee.html" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="Scripts\bootstrap.js" />

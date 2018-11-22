@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Employees</title>
+</head>
+<body>
+
+    <div>
+        <h2>Add Employee</h2>
+        <ul id="employees" />
+    </div>
+    <div>
+        <table>
+            <tr>
+                <td>Initial:</td>
+                <td> <input type="text" id="Initial" name="Initial" value="Initial"size="5" /></td>
+            </tr>
+
+            <tr>
+                <td>Firstname:</td>
+                <td> <input type="text" id="Firstname" name="Firstname" value="Firstname"size="50" /></td>
+            </tr>
+
+            <tr>
+                <td>Surname:</td>
+                <td> <input type="text" id="Lastname" name="Lastname" value="Lastname" size="50" /></td>
+            </tr>
+
+            <tr>
+                <td>Contact:</td>
+                <td> <input type="text" id="ContactNumber" name="ContactNumber"  value="ContactNumber" size="50" /></td>
+            </tr>
+
+            <tr>
+                <td>Email:</td>
+                <td> <input type="text" id="Email" name="Email" value="Email" size="50" /></td>
+            </tr>
+
+        </table>
+
+        <input type="button" value="Add" onclick="addEmployeeToDb();" id="addEmployee"/>
+        <p id="employee" />
+    </div>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script>
+        var uri = 'api/employee';
+
+        //$(document).ready(function () {
+
+        //$.getJSON(uri)
+        //    .done(function (data) {
+
+        //        //$.each(data, function (key, item) {
+        //        //    //alert(item.Firstname + '  '+ key);
+        //        //    // Add a list item for the product.
+        //        //    $('<li>', { text: formatItem(item) }).appendTo($('#employees'));
+        //        //});
+        //    });
+        //});
+
+        function formatItem(item) {
+            return item.Firstname + ' ' + item.Lastname;
+        }
+
+        function getById() {
+            var id = $('#EmployeeId').val();
+            $.getJSON(uri + '/' + id)
+                .done(function (data) {
+                    $('#employee').text(formatItem(data));
+                })
+                .fail(function (jqXHR, textStatus, err) {
+                    $('#employee').text('Error: ' + err);
+                });
+        }
+
+
+        function addEmployeeToDb() {
+            var employees = [];
+
+            var employee = {};
+            var Initial = $("#Initial").val();
+            var Firstname = $("#Firstname").val();
+            var Lastname = $("#Lastname").val();
+            var ContactNumber = $("#ContactNumber").val();
+            var Email = $("#Email").val();
+
+            employee.ContactNumber = ContactNumber;
+            employee.CreateDate = Date.now; //'2018-11-12 22:46:26.480';
+            employee.Email = Email;
+            employee.Firstname = Firstname;
+
+            employee.Initial = Initial;
+            employee.IsActive = true;
+            employee.Lastname = Lastname;
+            employee.UpdateDate = Date.now;//'2018-11-12 22:46:26.480';
+
+            //employees.push(data);
+
+            //alert(Date.now());
+            //alert(JSON.stringify(employee));
+
+
+            $.ajax({
+                url: "api/employee/AddEmployee",
+                type: "POST",
+                data: JSON.stringify(employee), //{ values: JSON.stringify(employees) },
+               // accept: "gzip; deflate",
+               //cache: false,
+         //       dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                //dataType: "json",
+                success: function (data) {
+                    alert('Done');
+                },
+                fail: function (data) {
+                    alert('This did not work');
+                }
+            });
+        }
+
+                //$("#addEmployee").click(function () {
+                 //   addEmployee();
+                //});
+            //});
+    </script>
+
+</body>
+</html>

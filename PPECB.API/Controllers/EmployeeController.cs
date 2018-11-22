@@ -32,9 +32,15 @@ namespace PPECB.API.Controllers
 
             return Ok(HttpStatusCode.NotModified);
         }
+        [System.Web.Http.HttpGet]
+        public IHttpActionResult AddEmployee()
+        {
+            EmployeeModelDetail model = new EmployeeModelDetail();
 
+            return Ok(model);
+        }
 
-        [System.Web.Http.HttpPost]
+        //[System.Web.Http.HttpPost]
         public IHttpActionResult DeleteEmployee(int id)
         {
             if (EmployeeModel.DeleteEmployee(id))

@@ -9,8 +9,8 @@ namespace PPECB.Repository.Factory
     {
         public override void Load()
         {
-           // Kernel.Bind<IEmployeeRepository>().To<EmployeeRepository>();
-            //Bind<IEmployeeRepository>().To<EmployeeSampleRepository>();
+            Kernel.Bind<IEmployeeRepository>().To<EmployeeRepository>();
+            Bind<IEmployeeRepository>().To<EmployeeSampleRepository>();
         }
     }
 }
